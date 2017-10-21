@@ -8,33 +8,43 @@ from django.utils import timezone
 # Create your models here.
 
 class FoodType(models.Model):
-    user1_id = models.ForeignKey('auth.User',related_name='User1')
-    user2_id = models.ForeignKey('auth.User', related_name='User2')
-    score = models.IntegerField()
+    name = models.CharField(max_length=1024)
+    vegeterian='VE'
+    vegan='VG'
+    ordinary='NO'
+    foodtypes = (
+        (vegeterian, 'Vegeterian'),
+        (vegan, 'Vegan'),
+        (ordinary, 'Ordinary')
+    )
+    type = models.CharField(max_length=2,choices=foodtypes,default=ordinary) 
+    #diabetic ??
+    #cooked raw
 
-    def score_changes():
-        score=score+1
 class FoodInstance(models.Model):
-    text = models.CharField(max_length=1024)
-    answer = models.CharField(max_length=1024)
-    def show(self):
-        print 'not working yet either'
-
-class Supply(models.Model):
-    user_id = models.ForeignKey('auth.User') 
-    riddle_id = models.ForeignKey(Riddle)
-    show_time = models.DateTimeField(default=timezone.now)
-    def check():
-        print 'also not working'
-
-class Disput(models.Model):
-    pass
-
-class UserSuggestion(models.Model):
-    pass
+    type = models.ForeignKey(FoodType, on_delete=models.PROTECT)
+    manufacturer = models.CharField(max_length=1024)
+    expire_date = models.DateField()
 
 class UserPerson(models.Model):
-    pass
+    name=models.CharField(max_length=1024, unique=True)
+    email=models.EmailField()
 
-class UserOrganization(models.Model):
-    pass
+class Supply(models.Model):
+    items=models.ManyToManyField(FoodInstance)
+    source = models.ForeignKey(UserPerson,on_delete=models.PROTECT)
+    #suggestions=models.ManyToManyField(UserSuggestion)
+    date=models.DateTimeField()
+    longitude=models.FloatField()
+    latitude=models.FloatField()
+
+class UserSuggestion(models.Model):
+    user_id=models.ForeignKey(UserPerson, on_delete=models.PROTECT)
+    supply=models.ForeignKey(Supply, on_delete=models.PROTECT)
+    date=models.DateTimeField()
+    longitude=models.FloatField()
+    latitude=models.FloatField()
+
+#maybe later
+#class UserOrganization(models.Model):
+#    pass
