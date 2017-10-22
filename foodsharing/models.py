@@ -27,8 +27,9 @@ class FoodInstance(models.Model):
     expire_date = models.DateField()
 
 class UserPerson(models.Model):
-    name=models.CharField(max_length=1024, unique=True)
+    name=models.CharField(max_length=100)
     email=models.EmailField()
+    rating=models.FloatField(default=0.)
 
 class Supply(models.Model):
     items=models.ManyToManyField(FoodInstance)
