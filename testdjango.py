@@ -6,5 +6,5 @@ from foodsharing.models import UserPerson
 
 for i in range(10):
     print 'user'+str(i), 'usermail'+str(i)+'@mail.ru', i
-    u=UserPerson(name='user'+str(i),email= 'usermail'+str(i)+'@mail.ru', rating=i)
+    u=UserPerson(name='u'+str(i),email= 'usail'+str(i)+'@mail.ru', rating=i)
     u.save()
