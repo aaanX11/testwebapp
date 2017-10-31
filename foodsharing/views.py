@@ -1,6 +1,33 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from .models import Supply, UserPerson, Suggestion, FoodType, FoodInstance
+from .forms import SupplyForm, SuggestionForm
+from django.shortcuts import render, redirect
 
-from django.shortcuts import render
+def suggestion(request):
+    if request.method == "POST":
+        pass
+    else:
+        pass
+#        return render(request, 'ggame/riddleshow.html',{'riddle':riddle, 'form':form})
 
-# Create your views here.
+
+def supply(request):
+    supply=Supplies.objects.get(pk=pk)
+    instances=FoodInstance.objects.filter(supplies__id__in=supply.items)
+    return render(request, 'foodsharing/supply.html',{'supply':supply, 'instances':instances})
+
+def list_supplies(request):
+    supplies=Supply.objects.all()[:20]
+    return render(request, 'foodsharing/list_supplies.html', {'supplies':supplies})
+
+def list_user(request):
+    users=UserPerson.objects.all()[:20]
+    return render(request, 'foodsharing/list_users.html', {'users':users})
+
+ 
+def list_suggestions(request):
+    suggestions=Suggestion.objects.all()[:20]
+    return render(request, 'foodsharing/list_suggestions.html', {'suggestions':suggestions})
+
+

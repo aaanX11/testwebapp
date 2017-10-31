@@ -1,0 +1,7 @@
+{% extends 'foodsharing/base.html' %}
+    {% block content %}
+        <p>List suggestionss</p>
+        {% for sug in suggestions %}
+           <p> {{ sug }}<\p>
+        {% endfor %}
+    {% endblock %}

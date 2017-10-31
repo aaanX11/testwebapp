@@ -21,12 +21,17 @@ class FoodType(models.Model):
     type = models.CharField(max_length=2,choices=foodtypes,default=ordinary) 
     #diabetic ??
     pretamanger = models.BooleanField()
+    class Meta:
+        verbose_name="тип еды"
+        verbose_name_plural="типы еды"
 
 class FoodInstance(models.Model):
     type = models.ForeignKey(FoodType, on_delete=models.PROTECT)
     manufacturer = models.CharField(max_length=1024)
     expire_date = models.DateField()
     class Meta:
+        verbose_name="экземпляр еды"
+        verbose_name_plural="экземпляры еды"
         indexes=[
             models.Index(fields=['expire_date',]),
         ]
@@ -39,15 +44,20 @@ class UserPerson(models.Model):
     object_id=models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
     rating_history = models.FloatField()
+    class Meta:
+        verbose_name="пользователь"
+        verbose_name_plural="пользователи"
 
 class Supply(models.Model):
-    items=models.ManyToManyField(FoodInstance)
+    items=models.ManyToManyField(FoodInstance, related_name='supplies')
     source = models.ForeignKey(UserPerson,on_delete=models.PROTECT)
     #suggestions=models.ManyToManyField(UserSuggestion)
     date=models.DateTimeField()
     longitude=models.FloatField()
     latitude=models.FloatField()
     class Meta:
+        verbose_name="поставка"
+        verbose_name_plural="поставки"
         indexes=[ 
             models.Index(fields=['date',]),
             models.Index(fields=['latitude','longitude',]),
@@ -61,6 +71,8 @@ class UserSuggestion(models.Model):
     longitude=models.FloatField()
     latitude=models.FloatField()
     class Meta:
+        verbose_name="предложение"
+        verbose_name_plural="предложения"
         indexes=[ 
             models.Index(fields=['date',]),
         ]

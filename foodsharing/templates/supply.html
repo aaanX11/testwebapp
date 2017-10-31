@@ -1,0 +1,9 @@
+{% extends 'foodsharing/base.html' %}
+    {% block content %}
+        <p>{{supply.date}}</p>
+        <p>{{supply.longitude}}</p>
+        <p>{{supply.latitude}}</p>
+        {% for fi in instances %}
+            <p>fi.type.name<\p>
+        {% endfor %}
+    {% endblock %}

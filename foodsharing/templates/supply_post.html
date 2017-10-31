@@ -1,0 +1,8 @@
+{% extends 'foodsharing/base.html' %}
+    {% block content %}
+        <p>{{supply.date}}</p>
+        <form method="POST">{% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="save btn btn-default">Submit</button>
+        </form>
+    {% endblock %}
