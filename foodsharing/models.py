@@ -25,31 +25,16 @@ class FoodType(models.Model):
         verbose_name="тип еды"
         verbose_name_plural="типы еды"
 
-class FoodInstance(models.Model):
-    type = models.ForeignKey(FoodType, on_delete=models.PROTECT)
-    manufacturer = models.CharField(max_length=1024)
-    expire_date = models.DateField()
-    class Meta:
-        verbose_name="экземпляр еды"
-        verbose_name_plural="экземпляры еды"
-        indexes=[
-            models.Index(fields=['expire_date',]),
-        ]
-
 class UserPerson(models.Model):
     name=models.CharField(max_length=100)
     email=models.EmailField()
     rating=models.FloatField(default=0.)
-    content_type=models.ForeignKey(ContentType, related_name="content_type_history")
-    object_id=models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
-    rating_history = models.FloatField()
     class Meta:
         verbose_name="пользователь"
         verbose_name_plural="пользователи"
 
 class Supply(models.Model):
-    items=models.ManyToManyField(FoodInstance, related_name='supplies')
+#    items=models.ManyToManyField(FoodInstance, related_name='supplies')
     source = models.ForeignKey(UserPerson,on_delete=models.PROTECT)
     #suggestions=models.ManyToManyField(UserSuggestion)
     date=models.DateTimeField()
@@ -63,7 +48,24 @@ class Supply(models.Model):
             models.Index(fields=['latitude','longitude',]),
         ]
 
+class FoodInstance(models.Model):
+    type = models.ForeignKey(FoodType, on_delete=models.PROTECT)
+    supply = models.ForeignKey(Supply, on_delete=models.CASCADE)
+    manufacturer = models.CharField(max_length=1024)
+    expire_date = models.DateField()
+    class Meta:
+        verbose_name="экземпляр еды"
+        verbose_name_plural="экземпляры еды"
+        indexes=[
+            models.Index(fields=['expire_date',]),
+        ]
 
+class Vote(models.Model):
+    user=models.ForeignKey(UserPerson)
+    content_type=models.ForeignKey(ContentType)
+    object_id=models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    
 class UserSuggestion(models.Model):
     user_id=models.ForeignKey(UserPerson, on_delete=models.PROTECT)
     supply=models.ForeignKey(Supply, on_delete=models.PROTECT)

@@ -5,10 +5,10 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^/list_supplies/$', views.list_supplies, name='list_supplies'),
-    url(r'^/list_users$', views.list_users)
-    url(r'^/list_suggestions$', views.list_suggestions)
-    url(r'^/supply/(?P<pk>\d+)/$', views.supply_show)
-    url(r'^/suggestion/(?P<pk>\d+)$', views.list_users)
+    url(r'^/list_users$', views.list_users),
+    url(r'^/list_suggestions$', views.list_suggestions),
+    url(r'^/supply/(?P<pk>\d+)/$', views.supply),
+    url(r'^/suggestion/(?P<pk>\d+)$', views.suggestion),
 ]
 
 if settings.DEBUG:
