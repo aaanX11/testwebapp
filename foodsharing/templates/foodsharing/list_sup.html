@@ -1,0 +1,9 @@
+{% extends 'foodsharing/base.html' %}
+    {% block content %}
+        <p>List supplies by date</p>
+        {% for sup in supplies %}
+           {{ sup.source }} 
+           <a href="{% url 'supply' pk=sup.pk %}">{{ sup.date }}</a>
+           <br>
+        {% endfor %}
+    {% endblock %}

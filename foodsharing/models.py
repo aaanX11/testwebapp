@@ -35,7 +35,9 @@ class UserPerson(models.Model):
 
 class Supply(models.Model):
 #    items=models.ManyToManyField(FoodInstance, related_name='supplies')
-    source = models.ForeignKey(UserPerson,on_delete=models.PROTECT)
+    source = models.ForeignKey(UserPerson,
+        #on_delete=models.PROTECT)
+        on_delete=models.CASCADE, blank=True)
     #suggestions=models.ManyToManyField(UserSuggestion)
     date=models.DateTimeField()
     longitude=models.FloatField()
@@ -49,8 +51,12 @@ class Supply(models.Model):
         ]
 
 class FoodInstance(models.Model):
-    type = models.ForeignKey(FoodType, on_delete=models.PROTECT)
-    supply = models.ForeignKey(Supply, on_delete=models.CASCADE)
+    type = models.ForeignKey(FoodType, 
+        #on_delete=models.PROTECT)
+        on_delete=models.CASCADE, blank=True)
+    supply = models.ForeignKey(Supply, 
+        on_delete=models.CASCADE,
+        blank= True )
     manufacturer = models.CharField(max_length=1024)
     expire_date = models.DateField()
     class Meta:
@@ -61,14 +67,18 @@ class FoodInstance(models.Model):
         ]
 
 class Vote(models.Model):
-    user=models.ForeignKey(UserPerson)
-    content_type=models.ForeignKey(ContentType)
+    user=models.ForeignKey(UserPerson, blank=True)
+    content_type=models.ForeignKey(ContentType, blank=True)
     object_id=models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
     
 class UserSuggestion(models.Model):
-    user_id=models.ForeignKey(UserPerson, on_delete=models.PROTECT)
-    supply=models.ForeignKey(Supply, on_delete=models.PROTECT)
+    user_id=models.ForeignKey(UserPerson, 
+        #on_delete=models.PROTECT)
+        on_delete=models.CASCADE, blank=True)
+    supply=models.ForeignKey(Supply, 
+        #on_delete=models.PROTECT)
+        on_delete=models.CASCADE, blank=True)
     date=models.DateTimeField()
     longitude=models.FloatField()
     latitude=models.FloatField()

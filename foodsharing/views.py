@@ -12,14 +12,14 @@ def suggestion(request):
 #        return render(request, 'ggame/riddleshow.html',{'riddle':riddle, 'form':form})
 
 
-def supply(request):
-    supply=Supplies.objects.get(pk=pk)
-    instances=FoodInstance.objects.filter(supply=supply.id)
+def supply(request, pk):
+    supply=Supply.objects.get(pk=pk)
+    instances=FoodInstance.objects.filter(supply=supply)
     return render(request, 'foodsharing/supply.html',{'supply':supply, 'instances':instances})
 
 def list_supplies(request):
     supplies=Supply.objects.all()[:20]
-    return render(request, 'foodsharing/list_supplies.html', {'supplies':supplies})
+    return render(request, 'foodsharing/list_sup.html', {'supplies':supplies})
 
 def list_users(request):
     users=UserPerson.objects.all()[:20]
@@ -28,6 +28,6 @@ def list_users(request):
  
 def list_suggestions(request):
     suggestions=UserSuggestion.objects.all()[:20]
-    return render(request, 'foodsharing/list_suggestions.html', {'suggestions':suggestions})
+    return render(request, 'foodsharing/list_sug.html', {'suggestions':suggestions})
 
 
