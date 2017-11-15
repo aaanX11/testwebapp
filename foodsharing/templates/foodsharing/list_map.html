@@ -1,0 +1,159 @@
+{% extends 'foodsharing/index.html' %}
+    {% block content %}
+
+{% for sup in supplies %}
+           {{ sup.source.name }}
+           <a href="{% url 'supply' pk=sup.pk %}">{{ sup.date }}</a>
+           <br>
+        {% endfor %}
+
+
+   
+  <div class="row content">
+    <!-- LeftFrameContent -->        
+    <div class="col-sm-2 sidenav">
+      
+      
+      <div class="share-wrap">
+          <p class="share-adress">Москва. Кремль.</p>
+          
+          <div class="food-instance-wrapper">
+              <span class="food-type">Картофан</span>
+              <span class= "weight">100кг  </span>
+              <span class="expire-date">18.01.17</span>
+          </div>
+
+          <div class="food-instance-wrapper">
+              <span>Картофан</span>
+              <span>100кг  </span>
+              <span>18.01.17</span>
+          </div>
+          <div class="food-instance-wrapper">
+              <span class="food-type"></span>
+              <span class= "weight"></span>
+              <span class="expire-date"></span>
+          </div>
+
+          <div class="share-owner">
+          </div>
+
+           <a data-toggle="modal" href="#myModal">Хочу забрать</a>
+           <!--<button type="button" class="btn btn-info btn-lg" id="myBtn">Open Modal</button> -->
+      </div> <!--/food-intance-wrapper-->
+
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+
+      
+
+    </div>  <!--EndLeftFrameContent -->
+
+
+    <div class="col-sm-10 text-left"> 
+      <h1>Доступные шары</h1>
+
+
+      <div class="map-containter">
+      <!-- Modal List -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Шара кремлевская</h4>
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-adress">
+                  <span class="full-adress">Москва, Кремль, 103073<span>
+                  <span class="show-phone"> +7 123 456 78 90</span>
+                </div>
+
+                <div class="share-content table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Продукт</th>
+                          <th>Вес</th>
+                          <th>Годен до</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Картофан</td>
+                          <td>100 кг</td>
+                          <td>17.12.17 </td>
+                        </tr>
+
+                         <tr>
+                          <td>2</td>
+                          <td>Нефть</td>
+                          <td>100 л</td>
+                          <td>17.12.17 </td>
+                        </tr>
+
+                         <tr>
+                          <td>3</td>
+                          <td>Водка</td>
+                          <td>100 л</td>
+                          <td>11.11.11 </td>
+                        </tr>
+
+                        <tr>
+                          <td>4</td>
+                          <td>Взятка</td>
+                          <td>100 шт</td>
+                          <td>31.12.99 </td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                </div>
+
+              
+            </div><!--/modal-body-->
+            
+            <div class="modal-owner">
+              <span class="owner-img"> <img src="img/cremlin_ava.png" class="small-ava"> </span>
+              <span class="owner-name"> Владимир Владимирович Путлер</span>
+              <span class="owner-rate"> 100 %</span>
+            </div><!--/modal-body-->
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Забрать</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+          </div><!--modal content -->
+          
+        </div>
+      </div>
+  
+        <div id="map" style="width:100%;height:400px;">
+          
+        </div>
+      </div>
+
+      
+    </div>
+    
+
+
+    <!--RightFrameIfNeeded
+    <div class="col-sm-2 sidenav">
+      <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div>
+    </div>
+    -->
+
+  </div>
+
+{% endblock %}
+

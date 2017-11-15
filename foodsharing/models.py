@@ -51,9 +51,10 @@ class Supply(models.Model):
         ]
 
 class FoodInstance(models.Model):
-    type = models.ForeignKey(FoodType, 
+    ftype = models.ForeignKey(FoodType, 
         #on_delete=models.PROTECT)
-        on_delete=models.CASCADE, blank=True)
+        on_delete=models.CASCADE, blank=True, default=None)
+    type = models.FloatField(default=0)
     supply = models.ForeignKey(Supply, 
         on_delete=models.CASCADE,
         blank= True )
@@ -68,6 +69,7 @@ class FoodInstance(models.Model):
 
 class Vote(models.Model):
     user=models.ForeignKey(UserPerson, blank=True)
+    rate=models.FloatField(default=0)
     content_type=models.ForeignKey(ContentType, blank=True)
     object_id=models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
@@ -76,6 +78,7 @@ class UserSuggestion(models.Model):
     user_id=models.ForeignKey(UserPerson, 
         #on_delete=models.PROTECT)
         on_delete=models.CASCADE, blank=True)
+#    user_id=models.FloatField(default=0)
     supply=models.ForeignKey(Supply, 
         #on_delete=models.PROTECT)
         on_delete=models.CASCADE, blank=True)

@@ -1,0 +1,9 @@
+{% extends 'foodsharing/base.html' %}
+    {% block content %}
+        <p>{{user.name}}</p>
+        <p>{{user.rating}}</p>
+        {% for s in suggestions %}
+            <p>{{ s.date }}<\p>
+            {{ s.longitude }} {{ s.latitude }}
+        {% endfor %}
+    {% endblock %}

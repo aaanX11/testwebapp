@@ -1,0 +1,9 @@
+{% extends 'foodsharing/base.html' %}
+    {% block content %}
+        <p>List users</p>
+        {% for u in users %}
+           <a href="{% url 'user' pk=u.pk %}">{{ u.name }}</a>
+           {{ u.rating }}
+           <br>
+        {% endfor %}
+    {% endblock %}

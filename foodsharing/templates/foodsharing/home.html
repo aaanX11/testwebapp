@@ -1,0 +1,14 @@
+{% extends 'foodsharing/base.html' %}
+    {% block content %}
+        Фудшеринг – это проект, который помогает организациям перестать выбрасывать еду, 
+        <br>
+        а людям – получать её бесплатно и помогать это делать другим.
+       <br>
+       <a href="{% url 'list_supplies' %}">Список событий</a>   
+        <br>     
+        <a href="{% url 'list_users' %}">Список пользователей</a>
+        <br>
+        <a href="{% url 'login' %}">Войти</a>
+        <br>
+        <a href="{% url 'signup' %}">Зарегистрироваться</a>
+    {% endblock %}

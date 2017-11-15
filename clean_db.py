@@ -9,5 +9,10 @@ s= int(raw_input())
 if s==1:
     cursor=connection.cursor()
     cursor.execute("TRUNCATE TABLE foodsharing_UserPerson CASCADE")
+    cursor.execute("TRUNCATE TABLE foodsharing_FoodType CASCADE") 
+    cursor.execute("TRUNCATE TABLE foodsharing_Supply CASCADE")
+    cursor.execute("TRUNCATE TABLE foodsharing_FoodInstance CASCADE") 
+    cursor.execute("TRUNCATE TABLE foodsharing_Vote CASCADE")
+    cursor.execute("TRUNCATE TABLE foodsharing_UserSuggestion CASCADE") 
 
 #python manage.py flush

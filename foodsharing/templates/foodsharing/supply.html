@@ -4,6 +4,7 @@
         <p>{{supply.longitude}}</p>
         <p>{{supply.latitude}}</p>
         {% for fi in instances %}
-            <p>fi.type.name<\p>
+            <p>{{ fi.type.name }}<\p>
+            {{ fi.expire_date }}
         {% endfor %}
     {% endblock %}
