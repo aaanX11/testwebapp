@@ -1,4 +1,5 @@
 import random
+from django.contrib.contenttypes.models import ContentType
 from django.db import connection
 import time
 import datetime
@@ -45,7 +46,7 @@ def fillSupply(nn, nnn, supplies, users):
         for i in range(nnn):
             u.append(Supply(
                 source_id= users[random.randint(0,len(users)-1)],
-                date=timezone.now(),
+                date=timezone.now()-datetime.timedelta(days=random.randint(0,300)-150),
                 longitude=37.618423+0.2*random.random()-0.1,#55.970211, 37.475328
                 latitude=55.751244+0.2*random.random()-0.1#55.539769, 37.491808
             ))
@@ -61,7 +62,8 @@ def fillFoodInstance(nn, nnn, finsts, ftypes, supplies):
                 ftype_id= ftypes[random.randint(0,len(ftypes)-1)],
                 supply_id=supplies[random.randint(0,len(supplies)-1)],
                 manufacturer="manufacturer"+str(random.randint(0,10)),
-                expire_date=datetime.datetime(2017, random.randint(1,12),random.randint(1,28), 18),
+#                expire_date=datetime.datetime(2017, random.randint(1,12),random.randint(1,28), 18),
+                expire_date=timezone.now()-datetime.timedelta(days=random.randint(0,300)-150)
             ))
         uu=FoodInstance.objects.bulk_create(u)
         finsts += [x.id for x in uu]
@@ -74,7 +76,7 @@ def fillUserSuggestion(nn, nnn, sugests, users, supplies):
             u.append(UserSuggestion(
                 user_id_id=users[random.randint(0,len(users)-1)],
                 supply_id=supplies[random.randint(0,len(supplies)-1)],
-                date=datetime.datetime(2017, random.randint(1,12),random.randint(1,28), 17),
+                date=timezone.now()-datetime.timedelta(days=random.randint(0,300)-150),
                 longitude=37.618423+0.2*random.random()-0.1,
                 latitude=55.751244+0.2*random.random()-0.1
             ))
@@ -82,17 +84,20 @@ def fillUserSuggestion(nn, nnn, sugests, users, supplies):
         sugests  += [x.id for x in uu]
 
 def fillVote(nn, nnn, users, supplies, sugests):    
-    content_t=ContentType.objects.get_for_models(Supply, UserSuggestions)
+    models= [Supply, UserSuggestion]
+    content_t=ContentType.objects.get_for_models(Supply, UserSuggestion)
+    #print content_t
     arr=[supplies,sugests]
+    #print arr[0][:20], arr[1][0:20]
     for j in range(nn):
         u=[]
         for i in range(nnn):
             k=random.randint(0,1)
             u.append(Vote(
                 user_id=users[random.randint(0,len(users)-1)],
-                rating=10*random.random()-5,
-                content_type=content_t[k],
-                object_id=arr[random.randint(0,len(arr[k])-1)]
+                rate=10*random.random()-5,
+                content_type=content_t[models[k]],
+                object_id=arr[k][random.randint(0,len(arr[k])-1)]
             ))
         Vote.objects.bulk_create(u)
         
@@ -103,7 +108,7 @@ print 'counting UserPerson objects', ' time = ', time.time()-start_time
 start_time=time.time()
 nn=100
 nnn=1000
-fillUserPerson(nn,nnn, users)    
+#fillUserPerson(nn,nnn, users)    
 print 'filling model UserPerson (pieces =', nn, ')*(piece_size = ', nnn, ') time = ', time.time()-start_time 
 start_time=time.time()
 
@@ -112,7 +117,7 @@ print 'counting FoodType objects', ' time = ', time.time()-start_time
 start_time=time.time()
 nn=50
 nnn=2000
-fillFoodType(nn,nnn, ftypes)    
+#fillFoodType(nn,nnn, ftypes)    
 print 'filling model FoodType (pieces =', nn, ')*(piece_size = ', nnn, ') time = ', time.time()-start_time 
 start_time=time.time()
 
@@ -121,7 +126,7 @@ print 'counting Supply objects', ' time = ', time.time()-start_time
 start_time=time.time()
 nn=50
 nnn=2000
-fillSupply(nn,nnn, supplies, users)    
+#fillSupply(nn,nnn, supplies, users)    
 print 'filling model Supply (pieces =', nn, ')*(piece_size = ', nnn, ') time = ', time.time()-start_time 
 start_time=time.time()
 
@@ -130,7 +135,7 @@ print 'counting FoodInstance objects', ' time = ', time.time()-start_time
 start_time=time.time()
 nn=200
 nnn=500
-fillFoodInstance(nn,nnn, finsts, ftypes, supplies)    
+#fillFoodInstance(nn,nnn, finsts, ftypes, supplies)    
 print 'filling model FoodInstance (pieces =', nn, ')*(piece_size = ', nnn, ') time = ', time.time()-start_time 
 start_time=time.time()
 
@@ -139,7 +144,7 @@ print 'counting UserSuggestion objects', ' time = ', time.time()-start_time
 start_time=time.time()
 nn=25
 nnn=4000
-fillUserSuggestion(nn, nnn, sugests, users, supplies)    
+#fillUserSuggestion(nn, nnn, sugests, users, supplies)    
 print 'filling model UserSuggestion (pieces =', nn, ')*(piece_size = ', nnn, ') time = ', time.time()-start_time 
 start_time=time.time()
 
