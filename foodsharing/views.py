@@ -26,7 +26,11 @@ def suggestion(request):
     else:
         pass
 def home(request):
-    return render(request, 'foodsharing/map.html')
+    if request.is_ajax():
+        HTTPresponse('strrrr')
+        print('strrrrr')
+    supplies=Supply.objects.all()[:20]
+    return render(request, 'foodsharing/list_map.html',{'supplies':supplies}) 
 
 def supply(request, pk):
     supply=Supply.objects.get(pk=pk)
@@ -58,5 +62,26 @@ def user(request, pk):
 def list_suggestions(request):
     suggestions=UserSuggestion.objects.all()[:20]
     return render(request, 'foodsharing/list_sug.html', {'suggestions':suggestions})
+
+
+def sugg_form(request):
+    if request.method == 'POST':
+        form = SuggestionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
+    else:
+        form = SuggestionForm()
+    return render(request, 'foodsharing/sugg_form.html', {'form': form})
+
+def supp_form(request):
+    if request.method == 'POST':
+        form = SupplyForm(request.POST)
+        if form.is_valid():
+            form.save()
+             
+    else:
+        form = SupplyForm()
+    return render(request, 'foodsharing/supp_form.html', {'form': form})
 
 

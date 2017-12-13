@@ -1,51 +1,27 @@
 {% extends 'foodsharing/index.html' %}
     {% block content %}
-
-{% for sup in supplies %}
-           {{ sup.source.name }}
-           <a href="{% url 'supply' pk=sup.pk %}">{{ sup.date }}</a>
-           <br>
-        {% endfor %}
-
-
    
   <div class="row content">
     <!-- LeftFrameContent -->        
     <div class="col-sm-2 sidenav">
-      
-      
+            
+      {% for sup in supplies %}      
       <div class="share-wrap">
-          <p class="share-adress">Москва. Кремль.</p>
+ 
+          <a href="{% url 'supply' pk=sup.pk %}">{{ sup.date }}</a>
+
+          <p class="share-adress">{{sup.latitude}} {{sup.longitude}}</p>     
           
-          <div class="food-instance-wrapper">
-              <span class="food-type">Картофан</span>
-              <span class= "weight">100кг  </span>
-              <span class="expire-date">18.01.17</span>
-          </div>
-
-          <div class="food-instance-wrapper">
-              <span>Картофан</span>
-              <span>100кг  </span>
-              <span>18.01.17</span>
-          </div>
-          <div class="food-instance-wrapper">
-              <span class="food-type"></span>
-              <span class= "weight"></span>
-              <span class="expire-date"></span>
-          </div>
-
           <div class="share-owner">
+              {{ sup.source.name }}
           </div>
 
-           <a data-toggle="modal" href="#myModal">Хочу забрать</a>
-           <!--<button type="button" class="btn btn-info btn-lg" id="myBtn">Open Modal</button> -->
-      </div> <!--/food-intance-wrapper-->
-
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-
-      
-
+           <a data-toggle="modal" href="#myModal{{sup.pk}}">Хочу забрать</a>
+           <!--<button type="button" class="btn btn-info btn-lg" id="myBtn{{sup.pk}}">Open Modal</button> -->
+      </div> <!--/share-wrap-->
+      {% endfor %}
+     
+     
     </div>  <!--EndLeftFrameContent -->
 
 
@@ -55,21 +31,25 @@
 
       <div class="map-containter">
       <!-- Modal List -->
-      <div class="modal fade" id="myModal" role="dialog">
+      {% for sup in supplies %}
+      <div class="modal fade" id="myModal{{sup.pk}}" role="dialog">
+
         <div class="modal-dialog">
         
           <!-- Modal content-->
           <div class="modal-content">
+            <div class="test">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Шара кремлевская</h4>
+              <h4 class="modal-title">Заголовок</h4>
             </div>
-            
+            </div>
             <div class="modal-body">
                 <div class="modal-adress">
                   <span class="full-adress">Москва, Кремль, 103073<span>
                   <span class="show-phone"> +7 123 456 78 90</span>
                 </div>
+
 
                 <div class="share-content table-responsive">
                     <table class="table">
@@ -84,7 +64,7 @@
                       <tbody>
                         <tr>
                           <td>1</td>
-                          <td>Картофан</td>
+                          <td>Xnjnj1</td>
                           <td>100 кг</td>
                           <td>17.12.17 </td>
                         </tr>
@@ -98,14 +78,14 @@
 
                          <tr>
                           <td>3</td>
-                          <td>Водка</td>
+                          <td>smth</td>
                           <td>100 л</td>
                           <td>11.11.11 </td>
                         </tr>
 
                         <tr>
                           <td>4</td>
-                          <td>Взятка</td>
+                          <td>smth else</td>
                           <td>100 шт</td>
                           <td>31.12.99 </td>
                         </tr>
@@ -119,19 +99,20 @@
             
             <div class="modal-owner">
               <span class="owner-img"> <img src="img/cremlin_ava.png" class="small-ava"> </span>
-              <span class="owner-name"> Владимир Владимирович Путлер</span>
+              <span class="owner-name"> {{sup.source.name}}</span>
               <span class="owner-rate"> 100 %</span>
             </div><!--/modal-body-->
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Забрать</button>
+              <a href="{% url 'supply' pk=sup.pk %}">{{ sup.date }}</a>
+              <button type="button" class="btn btn-default" data-dismiss="modal"><a href="{% url 'supply' pk=sup.pk %}">Забрать</a></button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
             </div>
           </div><!--modal content -->
           
         </div>
       </div>
-  
+      {% endfor %}
         <div id="map" style="width:100%;height:400px;">
           
         </div>
@@ -154,6 +135,27 @@
     -->
 
   </div>
+
+ {% for sup in supplies %}
+<script>
+
+$(document).ready(function(){
+    $("#myBtn{{sup.pk}}").click(
+      function(){
+        $("#myModal{{sup.pk}}").modal();
+    });
+});
+$(document).ready(function(){
+	addMarker({{sup.latitude}}, {{sup.longitude}});
+});
+
+
+</script>
+
+<!--<script src="/static/foodsharing/js/ajax.js"></script>-->
+
+{% endfor %}
+
 
 {% endblock %}
 

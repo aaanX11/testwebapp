@@ -41,8 +41,8 @@
 
       <!-- userlogin -->  
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        <li style="color:#00ff00"><a href="#"><span class="gyphicon"></span> 3 </a></li>
+        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li style="color:#00ff00"><a href="{% url 'list_supplies' %}"><span class="gyphicon"></span> 3 </a></li>
       </ul>
       <!--/userLogin-->
 
@@ -66,14 +66,6 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=
 AIzaSyAVa6r-la0nfY6Ms_e22qubp_04mmyUPGU&callback=myMap"></script>
-<script>
-$(document).ready(function(){
-    $("#myBtn").click(function(){
-        $("#myModal").modal();
-    });
-});
-</script>
-
 
 </body>
 </html>

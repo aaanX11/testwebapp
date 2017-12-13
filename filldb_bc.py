@@ -108,7 +108,7 @@ print 'counting UserPerson objects', ' time = ', time.time()-start_time
 start_time=time.time()
 nn=100
 nnn=1000
-#fillUserPerson(nn,nnn, users)    
+fillUserPerson(nn,nnn, users)    
 print 'filling model UserPerson (pieces =', nn, ')*(piece_size = ', nnn, ') time = ', time.time()-start_time 
 start_time=time.time()
 
@@ -117,7 +117,7 @@ print 'counting FoodType objects', ' time = ', time.time()-start_time
 start_time=time.time()
 nn=50
 nnn=2000
-#fillFoodType(nn,nnn, ftypes)    
+fillFoodType(nn,nnn, ftypes)    
 print 'filling model FoodType (pieces =', nn, ')*(piece_size = ', nnn, ') time = ', time.time()-start_time 
 start_time=time.time()
 
@@ -126,7 +126,7 @@ print 'counting Supply objects', ' time = ', time.time()-start_time
 start_time=time.time()
 nn=50
 nnn=2000
-#fillSupply(nn,nnn, supplies, users)    
+fillSupply(nn,nnn, supplies, users)    
 print 'filling model Supply (pieces =', nn, ')*(piece_size = ', nnn, ') time = ', time.time()-start_time 
 start_time=time.time()
 
@@ -135,7 +135,7 @@ print 'counting FoodInstance objects', ' time = ', time.time()-start_time
 start_time=time.time()
 nn=200
 nnn=500
-#fillFoodInstance(nn,nnn, finsts, ftypes, supplies)    
+fillFoodInstance(nn,nnn, finsts, ftypes, supplies)    
 print 'filling model FoodInstance (pieces =', nn, ')*(piece_size = ', nnn, ') time = ', time.time()-start_time 
 start_time=time.time()
 
@@ -144,7 +144,7 @@ print 'counting UserSuggestion objects', ' time = ', time.time()-start_time
 start_time=time.time()
 nn=25
 nnn=4000
-#fillUserSuggestion(nn, nnn, sugests, users, supplies)    
+fillUserSuggestion(nn, nnn, sugests, users, supplies)    
 print 'filling model UserSuggestion (pieces =', nn, ')*(piece_size = ', nnn, ') time = ', time.time()-start_time 
 start_time=time.time()
 

@@ -7,13 +7,13 @@ function myMap() {
 
   var mapCanvas = document.getElementById("map");
   var mapOptions = {center: myCenter, zoom: 10};
-  var map = new google.maps.Map(mapCanvas,mapOptions);
+  map = new google.maps.Map(mapCanvas,mapOptions);
 
   
-  flightPath.setMap(map);
-
+  //flightPath.setMap(map);
+  
   var marker=new google.maps.Marker({
-  position:myCenter
+  		position:myCenter
   });
   marker.setMap(map); 
 
@@ -21,5 +21,15 @@ function myMap() {
   content:"Hello World!"
   });
 
-infowindow.open(map,marker); 
+	//infowindow.open(map,marker); 
 }
+
+
+//function addMarker(pos1, pos2) {
+ //    location = new google.maps.LatLng(pos1, pos2);
+   //     marker = new google.maps.Marker({
+     //       position: location,
+       //     map: map
+        //});
+    //}
+
