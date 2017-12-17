@@ -5,6 +5,10 @@ from .forms import SupplyForm, SuggestionForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+import json
+from django.core import serializers
+
 
 def signup(request):
     if request.method == 'POST':
@@ -26,11 +30,11 @@ def suggestion(request):
     else:
         pass
 def home(request):
-    if request.is_ajax():
-        HTTPresponse('strrrr')
-        print('strrrrr')
     supplies=Supply.objects.all()[:20]
-    return render(request, 'foodsharing/list_map.html',{'supplies':supplies}) 
+    if request.is_ajax():
+        data = serializers.serialize('json', Supply.objects.all()[:20], use_natural_foreign_keys=True)
+        return HttpResponse(data)    
+    return render(request, 'foodsharing/list_map_ajax.html',{'supplies':supplies}) 
 
 def supply(request, pk):
     supply=Supply.objects.get(pk=pk)

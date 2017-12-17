@@ -29,6 +29,8 @@ class UserPerson(models.Model):
     name=models.CharField(max_length=100)
     email=models.EmailField()
     rating=models.FloatField(default=0.)
+    def natural_key(self):
+        return self.name
     class Meta:
         verbose_name="пользователь"
         verbose_name_plural="пользователи"

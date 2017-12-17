@@ -136,26 +136,7 @@
 
   </div>
 
- {% for sup in supplies %}
-<script>
-
-$(document).ready(function(){
-    $("#myBtn{{sup.pk}}").click(
-      function(){
-        $("#myModal{{sup.pk}}").modal();
-    });
-});
-$(document).ready(function(){
-	addMarker({{sup.latitude}}, {{sup.longitude}});
-});
-
-
-</script>
-
-<!--<script src="/static/foodsharing/js/ajax.js"></script>-->
-
-{% endfor %}
-
+<script src="/static/foodsharing/js/ajax.js"></script>
 
 {% endblock %}
 

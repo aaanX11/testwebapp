@@ -1,4 +1,6 @@
 
+var map;
+
 function myMap() {
   var stavanger = new google.maps.LatLng(58.983991,5.734863);
   var amsterdam = new google.maps.LatLng(52.395715,4.888916);
@@ -8,7 +10,7 @@ function myMap() {
   var mapCanvas = document.getElementById("map");
   var mapOptions = {center: myCenter, zoom: 10};
   map = new google.maps.Map(mapCanvas,mapOptions);
-
+  console.info("main.js")
   
   //flightPath.setMap(map);
   

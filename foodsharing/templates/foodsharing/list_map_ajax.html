@@ -1,0 +1,82 @@
+{% extends 'foodsharing/index.html' %}
+    {% block content %}
+   
+  <div class="row content">
+    <!-- LeftFrameContent -->        
+    <div class="col-sm-2 sidenav" id="col-sm-2sidenav">
+      <div class="share-wrap" style="visibility: hidden;">
+ 
+          <a href="{% url 'supply' pk=0 %}"></a>
+
+          <p class="share-adress"></p>     
+          
+          <div class="share-owner">
+              
+          </div>
+
+           <a data-toggle="modal" href="#myModal">Хочу забрать</a>
+           <!--<button type="button" class="btn btn-info btn-lg" id="myBtn{{sup.pk}}">Open Modal</button> -->
+      </div> <!--/share-wrap-->     
+    </div>  <!--EndLeftFrameContent -->
+
+
+    <div class="col-sm-10 text-left"> 
+      <h1>Доступные шары</h1>
+      <div class="map-containter">
+      <!-- Modal List -->
+
+      <div class="modal fade" id="myModal" role="dialog" style="visibility: hidden;">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="test">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Заголовок</h4>
+            </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-adress"><span class="full-adress"><span><span class="show-phone"></span></div>
+                <div class="share-content table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>#</th> <th>Продукт</th> <th>Вес</th> <th>Годен до</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td><td>Xnjnj1</td><td>100 кг</td><td>17.12.17 </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+            </div><!--/modal-body-->
+            
+            <div class="modal-owner">
+              <span class="owner-img"> <img src="img/cremlin_ava.png" class="small-ava"> </span>
+              <span class="owner-name"> </span>
+              <span class="owner-rate"> 100 %</span>
+            </div><!--/modal-body-->
+
+            <div class="modal-footer">
+              <a href=""></a>
+              <button type="button" class="btn btn-default" data-dismiss="modal"><a href="">Забрать</a></button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+          </div><!--modal content -->
+          
+        </div>
+      </div>
+      
+        <div id="map" style="width:100%;height:400px;">
+          
+        </div>
+      </div>      
+    </div>
+  </div>
+
+<script src="/static/foodsharing/js/ajax.js"></script>
+
+{% endblock %}
+
